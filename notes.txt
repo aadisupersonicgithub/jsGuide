@@ -1,0 +1,35 @@
+Aim : think parallel to implement same feature, if not then observe why his is better how he is using throughly (use chatgpt)
+Finish 3 sections tonight in 5 hours.
+Usecase oriented learning is use in project, ask chatgpt.
+Implement standalone first. Once confident use in main project ie stopwatch.
+Learn basics so can understand React benefits.
+Think advanced usecases.
+Dont remember everything, just understand and know learnt from where. 
+Depend on 2nd brain.
+Calendar, SSoT, Outwork, 2nd Brain.
+Start from wherever left.
+Focus on 20-80.
+Project : standalone features.
+
+-> onClick on h1 ? 
+
+
+
+Random, distill in onenote...never hop, focus 1 thing.
+1. use adobe photoshop, aftereffects crack  
+    i. create logo
+    ii. create Calendar, SSoT, Outwork, 2nd Brain [or use online tools]
+
+Notedown all the issues first then later think solutions eg video editing, ask ChatGPT to resolve query then. 
+    i. learn removing texts/ adding masks
+    ii. dont know usecases (take some course na, only usecase oriented)
+
+
+FUN 
+Chrome devTools Mastery, web comp.
+Creatings logs arrays.
+Learn pseudo selectors, web components first. Focus 20-80(ignore if not required).
+Unit testing. Async, webpack, put, delete, jelly, deploying  
+Animation, 3d, payments
+
+
