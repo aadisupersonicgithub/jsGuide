@@ -1,13 +1,13 @@
 // practice project
-let modal = document.querySelector('#add-modal');
+const modal = document.querySelector('#add-modal');
 // can do document.getElementById('add-modal') FASTER 
 
-let addBtn = document.querySelector('header button');
+const addBtn = document.querySelector('header button');
 // document.querySelector('#buttonIdIfHave')
 // document.querySelector('header').lastElementChild; not recommended as last element may change 
 
-let cancelBtn = document.querySelector('.btn.btn--passive')
-let addMovieBtn = cancelBtn.nextElementSibling;
+const cancelBtn = document.querySelector('.btn.btn--passive')
+const addMovieBtn = cancelBtn.nextElementSibling;
 
 // 174 : validating inputs 
 const inputs = document.querySelectorAll('input');
@@ -16,8 +16,12 @@ const inputs = document.querySelectorAll('input');
 let movies = []
 
 // 173 : controlling backdrop 
-let backdrop = document.querySelector("#backdrop"); // document.body.firstElementChild
+const backdrop = document.querySelector("#backdrop"); // document.body.firstElementChild
 
+const deleteModal = document.querySelector('#delete-modal')
+const deleteNo = deleteModal.querySelector('.btn--passive')
+const deleteYes = deleteModal.querySelector('.btn--danger')
+console.dir(deleteYes, deleteNo)
 
 // 176 render items on screen 
 const entryTextSection = document.querySelector('#entry-text');
@@ -28,7 +32,43 @@ const updateUI = () => {
         entryTextSection.style.display = 'none';
     }
 }
-const renderNewMovieElement = (title, imageUrl, rating) => {
+
+const deleteMovie = (newMovie, newMovieElement) => {
+    let idx = 0;
+    for (let movie of movies) {
+        if (newMovie.id === movie.id) {
+            break;
+        }
+        ++idx;
+    }
+    // delete index = idx from movies 
+    movies.splice(idx, 1);
+    console.log(movies);
+    // now re render the movies in UI and update in DOM 
+    const movieRoot = document.querySelector('#movie-list');
+    movieRoot.removeChild(newMovieElement)
+    deleteModal.classList.toggle('visible');
+    toggleBackdropModal();
+    updateUI();
+}
+
+
+let reqMovie, reqMovieElement;
+// 177 deleting elements movie 
+const deleteMovieHandler = (newMovie, newMovieElement) => {
+
+    // show delete confirmation modal 
+    deleteModal.classList.toggle('visible');
+    toggleBackdropModal();
+    reqMovie = newMovie;
+    reqMovieElement = newMovieElement;
+
+
+
+};
+
+const renderNewMovieElement = (newMovie) => {
+    const { title, image: imageUrl, rating } = newMovie;
     const newMovieElement = document.createElement('li');
     newMovieElement.className = 'movie-element';
     newMovieElement.innerHTML = `
@@ -40,6 +80,8 @@ const renderNewMovieElement = (title, imageUrl, rating) => {
             <p> ${rating} / 5 stars </p>
         </div>
     `;
+    newMovieElement.addEventListener('click', deleteMovieHandler.bind(this, newMovie, newMovieElement));
+    // js will clear this listener if the node is not in DOM, ie when 
     const movieRoot = document.querySelector('#movie-list');
     movieRoot.append(newMovieElement);
 }
@@ -49,12 +91,34 @@ const toggleBackdropModal = () => {
 }
 //173b close modal 1. on clicking backdrop or 2. on clicking cancel 
 const backdropClickHandler = () => {
-    toggleMovieModal();
+    toggleBackdropModal();
+    modal.classList.toggle('visible');
 };
 const cancelBtnClickHandler = () => {
-    toggleMovieModal();
+    toggleMovieModalAndBackdrop();
     clearInputs()
 }
+
+
+const toggleDeleteModal = () => {
+    deleteModal.classList.toggle('visible');
+}
+
+
+const deleteClickHandler = () => {
+    console.log("Delete it for sure")
+    debugger;
+    deleteMovie(reqMovie, reqMovieElement);
+}
+
+const dontDeleteClickHandler = () => {
+    console.log("Change of plans, DONT Delete");
+    toggleDeleteModal();
+    toggleBackdropModal();
+
+}
+deleteYes.addEventListener('click', deleteClickHandler);
+deleteNo.addEventListener('click', dontDeleteClickHandler);
 
 // 175b clear inputs 
 const clearInputs = () => {
@@ -78,6 +142,7 @@ const addMovieBtnClickHandler = () => {
 
     // 175 creating and storing movies 
     const newMovie = {
+        id: Math.random().toString(),
         title: titleValue,
         image: imageURLValue,
         rating: ratingValue
@@ -89,23 +154,28 @@ const addMovieBtnClickHandler = () => {
     }
     console.log(movies);
     toggleMovieModal();
+    toggleBackdropModal();
     clearInputs()
     updateUI();
-    renderNewMovieElement(newMovie.title, newMovie.image, newMovie.rating)
+    renderNewMovieElement(newMovie)
 }
 
 // 172 : controlling modal 
 const toggleMovieModal = () => {
     modal.classList.toggle('visible'); // alt : add/remove/className 
-    toggleBackdropModal();
 
+
+}
+const toggleMovieModalAndBackdrop = () => {
+    toggleBackdropModal();
+    toggleMovieModal()
 }
 
 
 backdrop.addEventListener('click', backdropClickHandler);
 cancelBtn.addEventListener('click', cancelBtnClickHandler);
 addMovieBtn.addEventListener('click', addMovieBtnClickHandler)
-addBtn.addEventListener('click', toggleMovieModal)
+addBtn.addEventListener('click', toggleMovieModalAndBackdrop)
 
 
 

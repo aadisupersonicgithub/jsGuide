@@ -32,4 +32,5 @@ Learn pseudo selectors, web components first. Focus 20-80(ignore if not required
 Unit testing. Async, webpack, put, delete, jelly, deploying  
 Animation, 3d, payments
 
+TODO: understand multi event listneres, how memory assigned, how to clear, when error 
 
