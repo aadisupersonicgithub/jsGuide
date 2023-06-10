@@ -217,3 +217,33 @@ const obj = new Object(); // builtin base class later useful
 const obj2 = {}
 
 const arr = new Array(); // similar 
+
+
+// Object descriptors 
+
+const mc = {
+    name: 'aadi',
+    greet: function () {
+        console.log("Welcome EMPEROR ", this.name)
+    }
+}
+mc.greet()
+const mcDes = Object.getOwnPropertyDescriptors(mc)
+console.log(mcDes) // gives new object with property descriptors (ie metadata of object) configurable/enumerable/writable 
+
+// console.log(mcDes.#name.configurable)
+// USECASE: in advanced prog, you wanna lockdown property, so they cant be written again
+Object.defineProperty(mc, 'name', {
+    configurable: false, // set FALSE if dont want to delete later.
+    value: "POWER: aadi"
+})
+
+console.log(mc.name)
+// 
+for (const key in mc) {
+    console.log(key); // name, greet
+}
+// enumerable : FAlSE => skipped if iterated over keys of that object (ie no key appear , though exist)
+// configurable : FALSE => cant modify this object / key further (ie no deletion of key possible, though appear + exist)
+// writable : FAlse => cant overwirte (appear, exist, but not updatable)
+// eg can make enumerable false for , internal keys of getters and setters 
