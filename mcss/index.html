@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" defer></script>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+    </style> -->
+</head>
+
+<body>
+    <!-- <h1 class="container white-text accent-4 darken-3 text-darken-3 red card-panel center-align z-depth-5"> Welcome
+        buddy </h1>
+    <button class="btn-floating btn-large scale-transition material-icons left"> Click <span class="badge">3</span>
+    </button> -->
+
+
+    <nav class="white-text blue">
+        <div class="nav-wrapper container">
+            <a href="#!" class="brand-logo">Aadi </a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="badges.html">Services</a></li>
+                <li><a href="collapsible.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="mobile.html">Contact</a></li>
+                <li>
+                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="badges.html">Services</a></li>
+        <li><a href="collapsible.html">Gallery</a></li>
+        <li><a href="mobile.html">About</a></li>
+        <li><a href="mobile.html">Contact</a></li>
+        <li>
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Sign Up</a>
+        </li>
+    </ul>
+
+
+
+    <div class="carousel carousel-slider">
+        <a class="carousel-item" href="#one!"><img
+                src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"></a>
+        <div class="carousel-fixed-item white-text center-align">
+            <h2> Heading for carousel </h2>
+            <p class="white-text"> Description for carousel</p>
+
+            <a class="waves-effect waves-dark btn" href="/ex" target="_blank"> Explore <i
+                    class="material-icons right">send</i></a>
+        </div>
+        <a class="carousel-item" href="#two!"><img
+                src="https://www.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej-1280x720.png"></a>
+        <a class="carousel-item" href="#three!"><img
+                src="https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"></a>
+        <a class="carousel-item" href="#four!"><img
+                src="https://img.freepik.com/free-photo/space-background-realistic-starry-night-cosmos-shining-stars-milky-way-stardust-color-galaxy_1258-154643.jpg"></a>
+        <a class="carousel-item" href="#five!"><img
+                src="https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg"></a>
+    </div>
+
+
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red">
+            <i class="large material-icons">mode_edit</i>
+        </a>
+        <ul>
+            <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+            <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+            <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+            <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+        </ul>
+    </div>
+    <section>
+        <h2 class="center-align blue-text">About Us</h2>
+        <div class="row">
+            <div class="col s4 m4 l4 offset-l4">
+                <hr />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m6 s12">
+                <img src="https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg"
+                    class="responsive-img materialboxed" data-caption="This is a very beautiful image">
+            </div>
+            <div class="col m6 s12">
+                <h4>Power</h4>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse expedita, in quidem deleniti aliquid
+                    necessitatibus?</p>
+                <a href="about.html" class="btn waves-effect waves-light blue white-text"> Know more</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="center-align blue-text">Our Services</h2>
+        <div class="row">
+            <div class="col s4 m4 l4 offset-l4">
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m4 l4">
+
+                <div class="card hoverable">
+                    <div class="card-image">
+                        <img src="https://www.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej-1280x720.png"
+                            class="responsive-img materialboxed" data-caption="This is a very beautiful image">
+                        <span class="card-title">Card Title</span>
+                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                                class="material-icons">add</i></a>
+                    </div>
+                    <div class="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information. I am
+                            convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="blue-text">This is a link</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col s12 m4 l4">
+
+                <div class="card hoverable">
+                    <div class="card-image">
+                        <img class="responsive-img materialboxed" data-caption="This is a very beautiful image"
+                            src="https://img.freepik.com/free-photo/space-background-realistic-starry-night-cosmos-shining-stars-milky-way-stardust-color-galaxy_1258-154643.jpg">
+                        <span class="card-title">Card Title</span>
+                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                                class="material-icons">add</i></a>
+                    </div>
+                    <div class="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information. I am
+                            convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="blue-text">This is a link</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col s12 m4 l4">
+
+                <div class="card hoverable">
+                    <div class="card-image">
+                        <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
+                            class="responsive-img materialboxed" data-caption="This is a very beautiful image">
+                        <span class="card-title">Card Title</span>
+                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                                class="material-icons">add</i></a>
+                    </div>
+                    <div class="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information. I am
+                            convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="blue-text">This is a link</a>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </section>
+
+
+    <section>
+        <h2 class="center-align blue-text">Our Gallery</h2>
+        <div class="row">
+            <div class="col s4 m4 l4 offset-l4">
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 l4 m4">
+                <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
+                    class="responsive-img materialboxed" data-caption="This is a very beautiful image">
+            </div>
+            <div class="col s12 l4 m4">
+                <img class="responsive-img materialboxed" data-caption="This is a very beautiful image"
+                    src="https://img.freepik.com/free-photo/space-background-realistic-starry-night-cosmos-shining-stars-milky-way-stardust-color-galaxy_1258-154643.jpg">
+
+            </div>
+            <div class="col s12 l4 m4">
+                <img src="https://www.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej-1280x720.png"
+                    class="responsive-img materialboxed" data-caption="This is a very beautiful image">
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col s12 l4 m4">
+                <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
+                    class="responsive-img materialboxed" data-caption="This is a very beautiful image">
+            </div>
+            <div class="col s12 l4 m4">
+                <img class="responsive-img materialboxed" data-caption="This is a very beautiful image"
+                    src="https://img.freepik.com/free-photo/space-background-realistic-starry-night-cosmos-shining-stars-milky-way-stardust-color-galaxy_1258-154643.jpg">
+
+            </div>
+            <div class="col s12 l4 m4">
+                <img src="https://www.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej-1280x720.png"
+                    class="responsive-img materialboxed" data-caption="This is a very beautiful image">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section>
+        <h2 class="center-align blue-text">Contact Us</h2>
+        <div class="row">
+            <div class="col s4 m4 l4 offset-l4">
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <form class="col s12 m6 l6 offset-l3">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="mobile" type="text" class="validate" data-length="10">
+                        <label for="mobile">Mobile</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <label for="textarea1">Your message</label>
+                    </div>
+                </div>
+
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file" multiple>
+                    </div>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                    </div>
+                </div>
+
+                <button class="btn waves-effect waves-light btn modal-trigger" type="submit" name="action"
+                    onclick="M.toast({html: 'Form submitted successfully !!'})">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+
+
+            </form>
+        </div>
+    </section>
+
+
+
+    <form class="col s12 m6 l6 offset-l6">
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                    <h4 class="align-center">Sign Up form</h4>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                            <label for="first_name">First Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="mobile" type="text" class="validate" data-length="10">
+                            <label for="mobile">Mobile</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="email" class="validate">
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="textarea1" class="materialize-textarea"></textarea>
+                            <label for="textarea1">Your message</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+
+                            <input type="text" class="datepicker">
+                            <label for="textarea1">Date of Birth</label>
+                        </div>
+                    </div>
+
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>File</span>
+                            <input type="file" multiple>
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                        </div>
+                    </div>
+                    <!-- 
+                    <button class="btn waves-effect waves-light btn modal-trigger" type="submit" name="action"
+                        onclick="M.toast({html: 'Form submitted successfully !!'})">Submit
+                        <i class="material-icons right">send</i>
+                    </button> -->
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+                    onclick="M.toast({html: 'Form submitted successfully !!'})">Sign Up</a>
+            </div>
+        </div>
+    </form>
+
+
+
+    <footer class="page-footer blue">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer
+                        content.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2023 @ Elite Edits
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JavaScript at end of body for optimized loading
+    <script type=" text/javascript" src="js/materialize.min.js">
+        </script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+
+
+        jQuery(document).ready(function () {
+            $('.sidenav').sidenav();
+            // $('.carousel').carousel({
+            //     // fullWidth: true,
+            //     // numVisible: 1
+            // });
+
+            $('.carousel.carousel-slider').carousel({
+                fullWidth: true,
+                indicators: true
+            });
+            const elem = $('.carousel')
+            var instance = M.Carousel.getInstance(elem);
+            console.log(instance)
+            instance.duration = 3000
+            instance.fullWidth = true;
+
+
+            $('.fixed-action-btn').floatingActionButton();
+            $('.materialboxed').materialbox();
+            $('input#mobile').characterCounter();
+            $('.modal').modal();
+            $('.datepicker').datepicker();
+        });
+    </script>
+
+</body>
+
+</html>
