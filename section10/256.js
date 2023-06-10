@@ -81,6 +81,7 @@ class ProductItem extends Component {
 
 
 class ProductList extends Component {
+    #products = []
 
     constructor(renderHookId) {
         super(renderHookId);
@@ -89,7 +90,7 @@ class ProductList extends Component {
     }
 
     fetchProducts() {
-        this.products = [
+        this.#products = [
             new Product("monitor", "https://images.philips.com/is/image/PhilipsConsumer/271V8_94-IMS-en_IN?$jpglarge$&wid=1250", 34000, "enhance productivity"),
             new Product("headphone", "https://vlebazaar.in/image/cache/catalog/boAt-Rockerz-370-Bluetooth-Wireless-On-Ear-Headphone-with-Mic-Buoyant-Bl/boAt-Rockerz-370-Bluetooth-Wireless-On-Ear-Headphone-with-Mic-Buoyant-Black-Rock-1100x1100.jpg", 4500, "quality experience while listening music")
         ]
@@ -97,7 +98,7 @@ class ProductList extends Component {
     }
 
     renderFetchedProducts() {
-        for (const prod of this.products) {
+        for (const prod of this.#products) {
             const prodEl = new ProductItem(prod, 'product-list');
         }
     }
@@ -132,6 +133,10 @@ class ShoppingCart extends Component {
         this.render();
     }
 
+    #fuckingPrivate() {
+        console.log("i am private function bitch...")
+    }
+
     addProduct(product) {
         const updatedItems = [...this.items];
         updatedItems.push(product);
@@ -147,6 +152,7 @@ class ShoppingCart extends Component {
     // }
 
     render() {
+        this.#fuckingPrivate();
         const cartEl = this.createRootElement('section', 'cart');
         cartEl.innerHTML = `
             <h2> Total: \$${0}</h2>
@@ -169,6 +175,9 @@ class Shop {
     render() {
         this.cart = new ShoppingCart('app');
         const productList = new ProductList('app');
+        // console.log(productList.#products) cant access private variables from outside.
+        // productList.#fuckingPrivate();
+        // usecase of private: eg if changing some variable wont rerender , so to avoid such behaviour by user. 
     }
 }
 
