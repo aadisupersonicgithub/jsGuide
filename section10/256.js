@@ -122,7 +122,14 @@ class ShoppingCart extends Component {
     }
 
     constructor(renderHookId) {
-        super(renderHookId);
+        super(renderHookId, false);
+        // declaring fun as Arrow in properties (but the way super works, it will restart after super, so render may get issue)
+        this.orderProducts = () => {
+            console.log("Ordering...")
+            console.log(this)
+            console.log(this.items)
+        }
+        this.render();
     }
 
     addProduct(product) {
@@ -131,12 +138,24 @@ class ShoppingCart extends Component {
         this.cartItems = updatedItems;
     }
 
+
+    // for sol1, 2 
+    // orderProducts() {
+    //     console.log("Ordering...")
+    //     console.log(this)
+    //     console.log(this.items)
+    // }
+
     render() {
         const cartEl = this.createRootElement('section', 'cart');
         cartEl.innerHTML = `
             <h2> Total: \$${0}</h2>
             <button> Order now </button>
         `;
+        const orderBtn = cartEl.querySelector('button');
+        // orderBtn.addEventListener('click', this.orderProducts.bind(this)) // so11,  below (as arrow dont know this , so it will assign of class)
+        // orderBtn.addEventListener('click', () => this.orderProducts()) // sol2
+        orderBtn.addEventListener('click', this.orderProducts)
 
         this.totalAmount = cartEl.querySelector('h2');
     }
