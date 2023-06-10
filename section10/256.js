@@ -198,18 +198,22 @@ class App {
 console.log(App._psuedoPrivate); // technically feasible, but not advisable... bcz underscore as prefix tells its private(pseudo)
 App.init();
 
-const p2 = new App('lo');
-console.log(typeof p2, p2 instanceof App, p2 instanceof Component)
+// const p2 = new App('lo');
+// console.log(typeof p2, p2 instanceof App, p2 instanceof Component)
 
-const myBtn = document.querySelector('button')
-console.log(myBtn)
-console.dir(myBtn)
+// const myBtn = document.querySelector('button')
+// console.log(myBtn)
+// console.dir(myBtn)
 
-console.log(myBtn instanceof HTMLButtonElement);
-console.log(myBtn instanceof HTMLElement);
-// baseClass : HTMLElement 
-console.log(HTMLButtonElement instanceof HTMLElement)
+// console.log(myBtn instanceof HTMLButtonElement);
+// console.log(myBtn instanceof HTMLElement);
+// // baseClass : HTMLElement
+// console.log(HTMLButtonElement instanceof HTMLElement)
 
-// call these HTMLElement etc classes, but technically something else... Prototypes , DOM deepdive module 
+// // call these HTMLElement etc classes, but technically something else... Prototypes , DOM deepdive module 
 
 
+const obj = new Object(); // builtin base class later useful 
+const obj2 = {}
+
+const arr = new Array(); // similar 
