@@ -1,0 +1,170 @@
+
+class Product {
+
+    constructor(name, image, price, desc) {
+        this.name = name;
+        this.url = image;
+        this.price = price;
+        this.description = desc;
+    }
+}
+
+class ElementAttribute {
+
+    constructor(attrName, attrValue) {
+        this.name = attrName;
+        this.value = attrValue;
+    }
+}
+
+class Component {
+
+    constructor(renderHookId, shouldRender = true) {
+        this.hookId = renderHookId;
+        if (shouldRender) this.render();
+
+    }
+
+    render() {
+        console.log("called")
+    }
+
+    createRootElement(tag, cssClasses, attributes) {
+        const rootElement = document.createElement(tag);
+        if (cssClasses) {
+            rootElement.className = cssClasses;
+        }
+        if (attributes && attributes.length > 0) {
+            for (const attr of attributes) {
+                rootElement.setAttribute(attr.name, attr.value);
+            }
+        }
+        document.getElementById(this.hookId).append(rootElement);
+        return rootElement;
+    }
+}
+
+class ProductItem extends Component {
+
+    constructor(product, renderHookId) {
+        super(renderHookId, false);
+        this.product = product;
+        this.render();
+    }
+
+    addToCart() {
+        App.addProductToCart(this.product);
+
+    }
+
+    render() {
+        const prodEl = this.createRootElement('li', 'product-item');
+
+        const prod = this.product;
+        prodEl.innerHTML = `
+            <div>
+                <img src="${prod.url}" alt="${prod.name}" height="1300" width="8 00" />
+                <div class="product-item__content">
+                    <h2> ${prod.name} </h2>
+                    <h3> \$${prod.price} </h3>
+                    <p> ${prod.description} </p>
+                    <button> Add to Cart </button>
+                </div>
+            </div>
+        `;
+
+        const addToCartBtn = prodEl.querySelector('button');
+        addToCartBtn.addEventListener('click', this.addToCart.bind(this, prod));
+        return prodEl;
+    }
+}
+
+
+class ProductList extends Component {
+
+    constructor(renderHookId) {
+        super(renderHookId);
+        this.fetchProducts();
+
+    }
+
+    fetchProducts() {
+        this.products = [
+            new Product("monitor", "https://images.philips.com/is/image/PhilipsConsumer/271V8_94-IMS-en_IN?$jpglarge$&wid=1250", 34000, "enhance productivity"),
+            new Product("headphone", "https://vlebazaar.in/image/cache/catalog/boAt-Rockerz-370-Bluetooth-Wireless-On-Ear-Headphone-with-Mic-Buoyant-Bl/boAt-Rockerz-370-Bluetooth-Wireless-On-Ear-Headphone-with-Mic-Buoyant-Black-Rock-1100x1100.jpg", 4500, "quality experience while listening music")
+        ]
+        this.renderFetchedProducts()
+    }
+
+    renderFetchedProducts() {
+        for (const prod of this.products) {
+            const prodEl = new ProductItem(prod, 'product-list');
+        }
+    }
+
+    render() {
+        const productListEl = this.createRootElement('ul', 'product-list', [new ElementAttribute('id', 'product-list')]);
+        return productListEl;
+    }
+
+};
+
+class ShoppingCart extends Component {
+    items = [];
+
+    get totalPrice() {
+        const sum = this.items.reduce((prev, curItem) => prev + curItem.price, 0);
+        return sum;
+    }
+
+    set cartItems(val) {
+        this.items = val; this.totalAmount.innerHTML = ` <h2> Total: \$${this.totalPrice.toFixed(2)}</h2>`
+    }
+
+    constructor(renderHookId) {
+        super(renderHookId);
+    }
+
+    addProduct(product) {
+        const updatedItems = [...this.items];
+        updatedItems.push(product);
+        this.cartItems = updatedItems;
+    }
+
+    render() {
+        const cartEl = this.createRootElement('section', 'cart');
+        cartEl.innerHTML = `
+            <h2> Total: \$${0}</h2>
+            <button> Order now </button>
+        `;
+
+        this.totalAmount = cartEl.querySelector('h2');
+    }
+}
+
+class Shop {
+    constructor() {
+        this.render();
+    }
+
+    render() {
+        this.cart = new ShoppingCart('app');
+        const productList = new ProductList('app');
+    }
+}
+
+
+class App {
+    static cart = 'DEFAULT_CART';
+
+    static init() {
+        const myShop = new Shop();
+        this.cart = myShop.cart;
+    }
+
+    static addProductToCart(product) {
+        this.cart.addProduct(product)
+    }
+}
+
+App.init();
