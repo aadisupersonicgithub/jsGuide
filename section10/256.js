@@ -184,6 +184,7 @@ class Shop {
 
 class App {
     static cart = 'DEFAULT_CART';
+    _psuedoPrivate = "boi";
 
     static init() {
         const myShop = new Shop();
@@ -194,5 +195,5 @@ class App {
         this.cart.addProduct(product)
     }
 }
-
+console.log(App._psuedoPrivate); // technically feasible, but not advisable... bcz underscore as prefix tells its private(pseudo)
 App.init();
