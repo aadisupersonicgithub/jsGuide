@@ -10,11 +10,47 @@ class Product {
 /* 
 console.log(new Product())
 console.log(new Product('power', 'www.com', 'MUST to have', 'blood, tears and sweat'))
- */
 
-class ProductItem {
-    constructor(product) {
+NOTE component ie tag, class and attributes vary but skeleton common 
+SOL: Remove it with help of inheritance, keeping common thing (ie Component) as base class ie createRootElement/ElementAttribute etc 
+JS dont support inheriting from multiple class. 
+*/
+class ElementAttribute {
+    // to guarantee structure attribute: ElementAttribute 
+    constructor(attrName, attrValue) {
+        this.name = attrName;
+        this.value = attrValue;
+    }
+}
+
+class Component {
+    constructor(renderHookId) {
+        console.log("if inherited classes dont have any constuctor, this Base class constructor gets called: " + renderHookId);
+        this.hookId = renderHookId;
+    }
+
+    createRootElement(tag, cssClasses, attributes) {
+        const rootElement = document.createElement(tag);
+        if (cssClasses) {
+            rootElement.className = cssClasses;
+        }
+        if (attributes && attributes.length > 0) {
+            for (const attr of attributes) {
+                rootElement.setAttribute(attr.name, attr.value);
+            }
+        }
+        // then append element to DOM
+        document.getElementById(this.hookId).append(rootElement);
+        return rootElement;
+    }
+}
+
+class ProductItem extends Component {
+    constructor(product, renderHookId) {
+        console.log("oye: ", renderHookId)
+        super(renderHookId);
         this.product = product;
+        console.log("here  ")
     }
     addToCart() {
         console.log("Adding to cart");
@@ -31,9 +67,10 @@ class ProductItem {
         */
     }
     render() {
-        const prodEl = document.createElement('li');
+        const prodEl = this.createRootElement('li', 'product-item');
+        // const prodEl = document.createElement('li');
+        // prodEl.className = 'product-item';
 
-        prodEl.className = 'product-item';
         const prod = this.product;
         prodEl.innerHTML = `
             <div>
@@ -57,21 +94,30 @@ class ProductItem {
 }
 
 
-class ProductList {
+class ProductList extends Component {
 
     products = [
         new Product("monitor", "https://images.philips.com/is/image/PhilipsConsumer/271V8_94-IMS-en_IN?$jpglarge$&wid=1250", 34000, "enhance productivity"),
         new Product("headphone", "https://vlebazaar.in/image/cache/catalog/boAt-Rockerz-370-Bluetooth-Wireless-On-Ear-Headphone-with-Mic-Buoyant-Bl/boAt-Rockerz-370-Bluetooth-Wireless-On-Ear-Headphone-with-Mic-Buoyant-Black-Rock-1100x1100.jpg", 4500, "quality experience while listening music")
     ]
 
-    render() {
-        const productListEl = document.createElement('ul');
+    constructor(renderHookId) {
+        super(renderHookId);
+    }
 
-        productListEl.className = 'product-list';
+    render() {
+        const productListEl = this.createRootElement('ul', 'product-list', [new ElementAttribute('id', 'product-list')]);
+
+        // const productListEl = document.createElement('ul');
+        // productListEl.className = 'product-list';
+
+        // productListEl.id = 'product-list';
 
         for (const prod of this.products) {
-            const prodEl = new ProductItem(prod);
-            productListEl.append(prodEl.render());
+            // const prodEl = new ProductItem(prod);
+            // productListEl.append(prodEl.render());
+            const prodEl = new ProductItem(prod, 'product-list');
+            prodEl.render();
         }
 
         return productListEl;
@@ -79,26 +125,50 @@ class ProductList {
 
 };
 
-class ShoppingCart {
+class ShoppingCart extends Component {
     items = [];
     // TODO: items update to re render. simple WHY communication is tough b/w components ? // this.render(); // will return html here, wont rerender in app 
+
+    get totalPrice() {
+        const sum = this.items.reduce((prev, curItem) => prev + curItem.price, 0);
+        return sum;
+    }
+
+    set cartItems(val) {
+        this.items = val;
+        this.totalAmount.innerHTML = ` <h2> Total: \$${this.totalPrice.toFixed(2)}</h2>`
+    }
+
+    constructor(renderHookId) {
+        super(renderHookId);
+        console.log("as it have constructor, so inherit parent constructor wont be called, call explicitly using super...renderHookId: ", renderHookId)
+    }
+
     addProduct(product) {
-        this.items.push(product);
-        const total = this.items.length;
-        this.totalAmount.innerHTML = ` <h2> Total: \$${total}</h2>`
+        // this.items.push(product);
+        const updatedItems = [...this.items];
+        updatedItems.push(product);
+        this.cartItems = updatedItems;
+
+        // const total = this.items.length;
+        // this.totalAmount.innerHTML = ` <h2> Total: \$${this.totalPrice}</h2>`
     }
 
     render() {
-        const cartEl = document.createElement('section');
+        // this object of current class can access Inherited class methods too by default.
+        // this.hookId = 'app'
+        const cartEl = this.createRootElement('section', 'cart');
 
-        cartEl.className = 'cart';
+        // const cartEl = document.createElement('section');
+
+        // cartEl.className = 'cart';
         cartEl.innerHTML = `
             <h2> Total: \$${0}</h2>
             <button> Order now </button>
         `;
 
         this.totalAmount = cartEl.querySelector('h2');
-        return cartEl;
+        // return cartEl; as already adding in createRootElement 
     }
 }
 
@@ -109,13 +179,14 @@ class Shop {
 
         // const cartList = new ShoppingCart(); const cartListEl = cartList.render(); 
         // later store in property of shop for ??? so use addProductToCart from productItem -> app to rerender directly.
-        this.cart = new ShoppingCart();
+        this.cart = new ShoppingCart('app');
         const cartListEl = this.cart.render();
-        renderHook.append(cartListEl)
+        // renderHook.append(cartListEl)
 
-        const productList = new ProductList();
+        const productList = new ProductList('app');
         const productListEl = productList.render();
-        renderHook.append(productListEl);
+        console.log(productListEl)
+        // renderHook.append(productListEl);
     }
 }
 
@@ -144,6 +215,15 @@ app  - shop - shoppingCart
 * code separate pieces(earlier objects now classes) and link those object/classes  
 * and combine later 
 order of class dont matter, js engine aware of all classes beforehand. but before creating objects
+// note const {keys} = new ClassName() as its same as {}
 
-Learning : declutter, krna kya hai EXACTLY , focus 20-80 features , root->leaf if stuck 
+252 Inheritance : creating and configuring elements is duplicate concept in each class , to conveniently share code among classes
+ie extraFeatures (but basics common) eg Post->ImagePost, VideoPost 
+Building multiple classes with code duplication is not optimal.
+
+
+
+Learning : declutter, krna kya hai EXACTLY , focus 20-80 features , root->leaf if stuck, CREATE > consume.
+
+
 */
