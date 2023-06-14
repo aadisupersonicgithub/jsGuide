@@ -147,3 +147,34 @@ const aadi = new Person();
 console.log(aadi.__proto__ === aadi.prototype)      // false 
 console.log(aadi.__proto__ === Person.prototype)    // true 
 
+
+
+
+/* 
+
+
+let k1 = {
+    n1: "n1"
+};
+// console.log(k1.prototype)
+console.dir(Object)
+
+let k2 = {
+    // n1: "n1 twice",
+    n2: "n2"
+}
+k2.__proto__ = k1;
+console.log(k2.n1);
+
+
+console.log(k1.__proto__ == Object.prototype)
+console.log(k1.__proto__.__proto__, Object.prototype)
+
+// function Object() {
+//     boom: 2
+// };
+// const o1 = new Object();
+// console.log(o1, o1.__proto__, o1.__proto__.__proto__ == Object.prototype)
+// console.log(k2.boom)
+
+*/
