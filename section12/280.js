@@ -1,30 +1,50 @@
-class Tooltip {
-    constructor(closeNotifierFunction) {
-        this.closeNotifier = closeNotifierFunction;
-    }
-
-    show(id) {
-        console.log("showing tooltip for... ", id)
+class Component {
+    constructor(hostElementId, insertBefore = false) {
+        if (hostElementId) {
+            this.hostElement = document.getElementById(hostElementId);
+        } else {
+            this.hostElement = document.body;
+        }
+        this.insertBefore = insertBefore;
     }
 
     detach() {
         console.log("detaching : ", this)
         this.element.remove();
     }
+    attach() {
+        // document.body.append(this.element);
+        this.hostElement.insertAdjacentElement(this.insertBefore ? 'afterbegin' : 'beforeend', this.element);
+
+    }
+
+}
+class Tooltip extends Component {
+    constructor(closeNotifierFunction) {
+        super('active-projects', true)
+        this.closeNotifier = closeNotifierFunction;
+        this.create();
+    }
+
+    show(id) {
+        console.log("showing tooltip for... ", id, " its Ok")
+    }
+
 
     closeTooltip = () => {
         this.detach();
         this.closeNotifier();
     }
 
-    attach() {
+    create() {
         const tooltipElement = document.createElement('div');
         tooltipElement.className = 'card';
         tooltipElement.textContent = 'POWERFUL AADI';
         tooltipElement.addEventListener('click', this.detach.bind(this));
         // tooltipElement.addEventListener('click', this.detach2);
         this.element = tooltipElement;
-        document.body.append(tooltipElement);
+
+
     }
 }
 
