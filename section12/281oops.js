@@ -1,8 +1,39 @@
 class Component {
+    constructor(hostElementId, insertBefore = false) {
+        if (hostElementId) {
+            this.hostElement = document.getElementById(hostElementId);
+        } else {
+            this.hostElement = document.body;
+        }
+        this.insertBefore = insertBefore;
 
+    }
+    attach(element) {
+        // let where = document.getElementById(id);
+        // where.append(element)
+        // this.hostElement.append(element);
+        this.hostElement.insertAdjacentElement(this.insertBefore ? 'afterbegin' : 'beforeend', element);
+    }
+
+    detach() {
+        this.element.remove();
+    }
 }
 
-class Tooltip {
+class Tooltip extends Component {
+    constructor(id) {
+        super(id, true)
+        this.create();
+        this.attach(this.element);
+    }
+
+    create() {
+        let tooltip = document.createElement('div');
+        tooltip.textContent = 'Tooltip is here...';
+        tooltip.className = 'card'
+        tooltip.addEventListener('click', this.detach.bind(this));
+        this.element = tooltip;
+    }
 
 }
 
@@ -12,12 +43,15 @@ class DOMHelper {
         btn.replaceWith(_btn);
         return _btn;
     }
+
     static moveElement(id, destination) {
         let ele = document.getElementById(id);
         let dest = document.querySelector(destination);
+        // as dom is reference, ele is removed and added simultaneiously
         dest.append(ele);
     }
 }
+
 class Project {
     constructor(id, switchProject, type) {
         // FIX 
@@ -26,7 +60,21 @@ class Project {
         // change per instance 
         this.switchProject = switchProject;
         this.connectSwitchButton(type);
+        this.connectMoreInfoButton();
+    }
 
+    connectMoreInfoButton() {
+        const prj = document.getElementById(this.id);
+        let btn1 = prj.querySelector(`button:first-of-type`);
+        // no need to clear listener as same in both instance 
+        btn1.addEventListener('click', this.tooltipDikhao.bind(this));
+
+
+    }
+    tooltipDikhao() {
+        console.dir(this)
+        console.log("ye hai tooltip", this.id)
+        const nx = new Tooltip(this.id);
     }
 
     connectSwitchButton(type) {
