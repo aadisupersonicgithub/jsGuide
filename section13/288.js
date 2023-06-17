@@ -220,7 +220,7 @@ class App {
 
         // type4 timers , async execution so wont block remaining code, 3rd arg is array of arg to be passed in 1st arg 
         // a. ONCE setTimeout 
-        let t1 = setTimeout(this.startAnalytics, 3000); //after 3sec executes this function 
+        // let t1 = setTimeout(this.startAnalytics, 3000); //after 3sec executes this function 
 
         // b. repeat : setInterval
         // let k = 1;
@@ -233,6 +233,68 @@ class App {
         //     clearTimeout(t1);
         //     clearInterval(t2); // clearTimeout(t2) works too 
         // })
+
+
+        // console.log(first)
+        console.log(location);
+
+        // location.href = 'https://www.youtube.com'
+        // location.replace('') // back wont work 
+        // location.assign('')
+        console.log("host: ", location.host)
+        console.log("origin:", location.origin)
+        console.log("pathname: ", location.pathname);
+
+        console.log("history: ", history);
+        // clicking browser back 
+        // history.back();
+        // history.front();
+        console.log("history length: ", history.length);
+        // moving user around, do carefully...not good practice 
+
+
+        console.log("navigator : ", navigator)
+        console.log("browser of user: ", navigator.userAgent);
+        // eg legacy if certain browser , dont run few scripts etc , but nowdays full support MOSTLY 
+
+        console.log("clipboard: ", navigator.clipboard);
+
+        navigator.geolocation.getCurrentPosition((data) => {
+            console.log("user pos: ", data)
+
+        })
+
+        // NOTE playaround MDN 
+        // 300. Date
+        console.log(new Date())
+        const data = new Date();
+        console.log("dATE METHODS: DATE, DAY, TIME")
+        console.log(data.getDate(), data.getDay(), data.getTime());
+        // use libraries/frameworks... 
+        const d1 = new Date();
+        const d2 = new Date(d1);
+        const d3 = new Date('07/11/19');
+        // different b/w dates and other usecasess can be achieved due to Date help 
+        console.log("d1, d2, d3 ", d1, d2, d3);
+        console.log("EXPLORE MDN")
+        // NOTE Playaround MDN 
+
+
+        // NOTE playaround ERROR object, its constructor 
+        try {
+            throw {}
+            throw new Error("Something went wrong")// message with reference where it occured 
+            const customErrorObject = new Error("something still wrong");
+            customErrorObject.code = 404;
+            customErrorObject.powerful = "aadi";
+            console.dir(customError);
+        } catch (er) {
+            console.dir(er);
+            console.log("message : ", er.message);
+            // error is standard object, just good for throwing and handling a/c as object 
+
+        }
+
     }
 
     static startAnalytics() {
@@ -241,6 +303,8 @@ class App {
         analyticsScript.defer = true;
         document.head.append(analyticsScript);
     }
+
+
 }
 
 App.init()
