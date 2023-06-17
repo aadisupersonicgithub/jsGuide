@@ -17,6 +17,7 @@ class Component {
     detach() {
         console.log("detaching : ", this)
         this.element.remove();
+
     }
     attach() {
         this.hostElement.insertAdjacentElement(this.insertBefore ? 'afterbegin' : 'beforeend', this.element);
@@ -25,8 +26,10 @@ class Component {
 
 }
 class Tooltip extends Component {
-    constructor(closeNotifierFunction, text) {
-        super('active-projects', true)
+    constructor(closeNotifierFunction, text, hostElementId) {
+
+        super(hostElementId, true)
+        this.hasTooltip = true;
         this.closeNotifier = closeNotifierFunction;
         this.text = text;
         this.create();
@@ -41,10 +44,10 @@ class Tooltip extends Component {
     create() {
         const tooltipElement = document.createElement('div');
         tooltipElement.className = 'card';
-        // tooltipElement.textContent = 'POWERFUL AADI';
-        console.log("=>issue? ", this.text)
         tooltipElement.textContent = this.text;
         tooltipElement.addEventListener('click', this.detach.bind(this));
+
+        console.log(this.hostElement.getBoundingClientRect())
         this.element = tooltipElement;
 
 
@@ -67,6 +70,7 @@ class DOMHelper {
 
 class ProjectItem {
     constructor(id, updateProjectsListFunction, type) {
+
         this.id = id;
         this.updateProjectsListHandler = updateProjectsListFunction;
         this.connectMoreInfoButton();
@@ -84,15 +88,13 @@ class ProjectItem {
         projElement.dataset.addInfoViaJs = "becoming PRO";
 
         const tooltipText = projElement.dataset.extraInfo;
-        console.log(typeof tooltipText)
 
         const tooltip = new Tooltip(() => {
             this.hasTooltip = false;
-        }, tooltipText);
+        }, tooltipText, this.id);
 
-        // tooltip.show(this.id);
         tooltip.attach();
-        this.hasTooltip = true;
+
     }
 
     connectMoreInfoButton() {
