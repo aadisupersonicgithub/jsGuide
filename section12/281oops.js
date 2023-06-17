@@ -12,6 +12,11 @@ class DOMHelper {
         btn.replaceWith(_btn);
         return _btn;
     }
+    static moveElement(id, destination) {
+        let ele = document.getElementById(id);
+        let dest = document.querySelector(destination);
+        dest.append(ele);
+    }
 }
 class Project {
     constructor(id, switchProject, type) {
@@ -66,7 +71,7 @@ class ProjectList {
         this.projects.push(proj)
         proj.update(this.switchProject.bind(this), this.type);
         // NOTE: update just ensures ki 'this' doosre instance ka lage for 'this' project
-
+        DOMHelper.moveElement(proj.id, `#${this.type}-projects`);
     }
 
     removeProject(projId) {
@@ -85,6 +90,7 @@ class ProjectList {
         const proj = this.projects.find(e => e.id === projId);
         this.addInOther(proj);
         this.removeProject(projId);
+
     }
 
 
